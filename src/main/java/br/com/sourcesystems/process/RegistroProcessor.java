@@ -19,7 +19,7 @@ public class RegistroProcessor implements ItemProcessor {
     public Object processItem(Object item) {
         LOG.info("Processando o arquivo csv...");
         Registro registro = (Registro) item;
-        registro.dataLeitura = Instant.now();
+        registro.setDataLeitura(Instant.now());
         return registro;
     }
 }

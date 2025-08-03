@@ -6,11 +6,11 @@ import org.apache.commons.csv.CSVRecord;
 
 public class Registro {
 
-    public String nome;
-    public String email;
-    public String telefone;
-    public String cpf;
-    public Instant dataLeitura;
+    private String nome;
+    private String email;
+    private String telefone;
+    private String cpf;
+    private Instant dataLeitura;
 
     public Registro() {}
 
@@ -21,7 +21,7 @@ public class Registro {
         this.cpf = cpf;
     }
 
-    public Registro(CSVRecord record) {
+    public Registro(final CSVRecord record) {
         this(
             record.get("nome"),
             record.get("email"),
@@ -69,8 +69,4 @@ public class Registro {
     public void setDataLeitura(Instant dataLeitura) {
         this.dataLeitura = dataLeitura;
     }
-
-    
-   
-
 }

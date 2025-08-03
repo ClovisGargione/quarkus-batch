@@ -14,19 +14,23 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCursor;
 
+import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import jakarta.enterprise.event.Observes;
 
 @ApplicationScoped
 public class MongoToCsvExporter {
 
-    @Inject
     private MongoClient mongoClient;
 
     @ConfigProperty(name = "csv.export.dir", defaultValue = "exportados")
     private String exportDir;
 
-    public void exportarCsv(/*@Observes StartupEvent event*/) {
+    public MongoToCsvExporter(MongoClient mongoClient) {
+        this.mongoClient = mongoClient;
+    }
+
+    public void exportarCsv(@Observes StartupEvent event) {
         try {
             // Garante que o diretório existe
             Path dirPath = Paths.get(exportDir);
